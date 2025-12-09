@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BVC Digital Clock</title>
+    <title>BVC Digital Clock - North Screen</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
 
@@ -11,7 +11,7 @@
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.18);
             
-            /* --- COLOURS --- */
+            /* --- COLORS --- */
             --segment-on-grad-start: #9ee9ff; 
             --segment-on-grad-end: #61b3f9;   
             /* Shadow radius halved from 20px to 10px */
@@ -85,15 +85,15 @@
             font-size: 1.4rem; /* Halved from 2.8rem */
             font-weight: 700; 
             text-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Shadows halved */
-            margin-bottom: 2px;
+            margin-bottom: 10px;
             line-height: 1.5; /* Adjusted for smaller scale */
         }
 
         #date-text {
             color: #99daff; 
-            font-size: 0.9rem; /* Halved from 1.8rem */
+            font-size: 1.0rem; /* Halved from 1.8rem */
             font-weight: 600; 
-            margin-bottom: 7px; 
+            margin-bottom: 20px; 
         }
 
         /* Glass Clock Face - Scaled to 50% */
@@ -107,7 +107,7 @@
             border: 1px solid var(--glass-border); 
             box-shadow: 
                 inset 0 1px 1px rgba(255,255,255,0.2),
-                0 10px 25px rgba(0, 0, 0, 0.15),
+                0 10px 15px rgba(0, 0, 0, 0.15),
                 0 0 12px rgba(255, 255, 255, 0.15);
             display: flex;
             justify-content: center;
@@ -207,7 +207,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px; /* Scaled down */
+            margin-top: 40px; /* Scaled down */
         }
 
         .logo-container img {
@@ -215,7 +215,7 @@
             height: auto;
             display: block;
             filter: brightness(0) invert(1); 
-            opacity: 0.85;
+            opacity: 1;
         }
 
     </style>
