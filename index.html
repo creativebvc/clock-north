@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BVC Alarm UI - 1080x900 Scale</title>
+    <title>BVC Digital Clock</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
 
@@ -11,18 +11,19 @@
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.18);
             
-            /* --- COLORS --- */
+            /* --- COLOURS --- */
             --segment-on-grad-start: #9ee9ff; 
             --segment-on-grad-end: #61b3f9;   
-            --segment-on-shadow: 0 0 20px rgba(128, 205, 254, 0.3); 
+            /* Shadow radius halved from 20px to 10px */
+            --segment-on-shadow: 0 0 10px rgba(128, 205, 254, 0.3); 
             --segment-off: rgba(255, 255, 255, 0.02);
             
-            /* Default background (will be overridden by JS) */
+            /* Default background */
             --default-bg: linear-gradient(135deg, #0f5c9e 0%, #003666 100%);
             
-            /* --- SCALED GEOMETRY (For 1080x900) --- */
-            --seg-th: 18px;    /* Thickness adjusted for 200px height */
-            --cut-size: 8px;   /* Corner cut size */
+            /* --- SCALED GEOMETRY (50% of previous) --- */
+            --seg-th: 9px;     /* Thickness halved (was 18px) */
+            --cut-size: 4px;   /* Corner cut halved (was 8px) */
         }
 
         * {
@@ -46,7 +47,7 @@
             color: white;
         }
 
-        /* Ambient Glow - Adjusted */
+        /* Ambient Glow - Halved Dimensions & Blur */
         body::before {
             content: '';
             position: absolute;
@@ -55,7 +56,7 @@
             width: 70vw;
             height: 70vw;
             background: radial-gradient(circle, rgba(255, 200, 200, 0.15) 0%, rgba(255,255,255,0) 70%);
-            filter: blur(120px);
+            filter: blur(60px); /* Halved from 120px */
             z-index: -1;
         }
 
@@ -63,14 +64,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 25px; /* Reduced gap */
-            width: 900px; /* Fits comfortably in 1080px */
-            max-height: 850px; /* Ensures fit in 900px height */
+            gap: 12px; /* Halved from 25px */
+            width: 450px; /* Fits comfortably in 540px */
+            max-height: 425px; 
         }
 
         /* Typography */
         .header-text {
-            margin-bottom: 25px;
+            margin-bottom: 12px; /* Halved from 25px */
             text-align: center;
             width: 100%;
         }
@@ -81,44 +82,44 @@
         
         #greeting-text {
             color: #ffffff;
-            font-size: 2.8rem; /* Slightly smaller */
+            font-size: 1.4rem; /* Halved from 2.8rem */
             font-weight: 700; 
-            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            margin-bottom: 5px;
-            line-height: 2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Shadows halved */
+            margin-bottom: 2px;
+            line-height: 1.5; /* Adjusted for smaller scale */
         }
 
         #date-text {
             color: #99daff; 
-            font-size: 1.8rem; 
+            font-size: 0.9rem; /* Halved from 1.8rem */
             font-weight: 600; 
-            margin-bottom: 15px; 
+            margin-bottom: 7px; 
         }
 
-        /* Glass Clock Face - Resized for 900px height */
+        /* Glass Clock Face - Scaled to 50% */
         .clock-face {
             width: 90%;
-            height: 320px; /* Reduced from 400px */
+            height: 160px; /* Halved from 320px */
             background: var(--glass-bg);
-            backdrop-filter: blur(35px);
-            -webkit-backdrop-filter: blur(35px);
-            border-radius: 50px;
-            border: 2px solid var(--glass-border); 
+            backdrop-filter: blur(18px); /* Halved from 35px */
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 25px; /* Halved from 50px */
+            border: 1px solid var(--glass-border); 
             box-shadow: 
                 inset 0 1px 1px rgba(255,255,255,0.2),
-                0 20px 50px rgba(0, 0, 0, 0.15),
-                0 0 25px rgba(255, 255, 255, 0.15);
+                0 10px 25px rgba(0, 0, 0, 0.15),
+                0 0 12px rgba(255, 255, 255, 0.15);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 35px; /* Adjusted gap */
+            gap: 17px; /* Halved from 35px */
             position: relative;
         }
 
         /* --- 7-Segment Digit Logic --- */
         .digit {
-            width: 120px;  /* Resized */
-            height: 200px; /* Resized */
+            width: 60px;  /* Halved from 120px */
+            height: 100px; /* Halved from 200px */
             position: relative;
             display: flex;
             align-items: center; 
@@ -136,13 +137,13 @@
             z-index: 2; 
         }
 
-        /* --- GEOMETRY & POSITIONS --- */
+        /* --- GEOMETRY & POSITIONS (All values / 2) --- */
         
         /* Horizontal Segments */
         .h-seg {
-            height: var(--seg-th); /* 18px */
-            width: 84px; /* 120 width - (18 * 2) = 84px */
-            left: 18px;  
+            height: var(--seg-th); /* 9px */
+            width: 42px; /* 60 - (9*2) = 42px */
+            left: 9px;  
             clip-path: polygon(
                 var(--cut-size) 0, 
                 calc(100% - var(--cut-size)) 0, 
@@ -155,8 +156,8 @@
 
         /* Vertical Segments */
         .v-seg {
-            width: var(--seg-th); /* 18px */
-            height: 80px; /* (200 height / 2) - offset buffer */
+            width: var(--seg-th); /* 9px */
+            height: 40px; /* (100 / 2) - offset buffer */
             clip-path: polygon(
                 50% 0, 
                 100% var(--cut-size), 
@@ -172,23 +173,23 @@
         .mid    { position: relative; margin: 0 auto; left: auto; top: 0; } 
         .bot    { bottom: 0; }
         
-        /* Vertical Offsets */
-        .top-l  { top: 15px; left: 0; }
-        .top-r  { top: 15px; right: 0; }
-        .bot-l  { bottom: 15px; left: 0; }
-        .bot-r  { bottom: 15px; right: 0; }
+        /* Vertical Offsets (Halved from 15px to 7.5px) */
+        .top-l  { top: 7.5px; left: 0; }
+        .top-r  { top: 7.5px; right: 0; }
+        .bot-l  { bottom: 7.5px; left: 0; }
+        .bot-r  { bottom: 7.5px; right: 0; }
 
 
         /* Colon Separator */
         .separator {
             display: flex;
             flex-direction: column;
-            gap: 35px;
-            padding-top: 10px;
+            gap: 17px; /* Halved from 35px */
+            padding-top: 5px;
         }
         .dot {
-            width: 18px;
-            height: 18px;
+            width: 9px;  /* Halved from 18px */
+            height: 9px;
             background: linear-gradient(to bottom, var(--segment-on-grad-start), var(--segment-on-grad-end));
             border-radius: 50%; 
             box-shadow: var(--segment-on-shadow);
@@ -206,11 +207,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 60px;
+            margin-top: 20px; /* Scaled down */
         }
 
         .logo-container img {
-            max-width: 250px; /* Scaled down slightly */
+            max-width: 125px; /* Halved from 250px */
             height: auto;
             display: block;
             filter: brightness(0) invert(1); 
@@ -381,7 +382,6 @@
             }
 
             // Ensure minutes have leading zero
-            // (Re-fetching minutes in 2-digit format to be safe)
             const minOptions = { timeZone: "America/Edmonton", minute: '2-digit' };
             const finalMin = now.toLocaleTimeString('en-US', { timeZone: "America/Edmonton", minute: '2-digit' }).slice(-2);
 
