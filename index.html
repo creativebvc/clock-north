@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BVC Digital Clock - North Screen</title>
+    <title>BVC Digital Clock - North Screen (540x450)</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
 
@@ -14,16 +14,15 @@
             /* --- COLORS --- */
             --segment-on-grad-start: #9ee9ff; 
             --segment-on-grad-end: #61b3f9;   
-            /* Shadow radius halved from 20px to 10px */
             --segment-on-shadow: 0 0 10px rgba(128, 205, 254, 0.3); 
             --segment-off: rgba(255, 255, 255, 0.02);
             
             /* Default background */
             --default-bg: linear-gradient(135deg, #0f5c9e 0%, #003666 100%);
             
-            /* --- SCALED GEOMETRY (50% of previous) --- */
-            --seg-th: 9px;     /* Thickness halved (was 18px) */
-            --cut-size: 4px;   /* Corner cut halved (was 8px) */
+            /* --- SCALED GEOMETRY (50% scale) --- */
+            --seg-th: 9px;     
+            --cut-size: 4px;   
         }
 
         * {
@@ -47,7 +46,7 @@
             color: white;
         }
 
-        /* Ambient Glow - Halved Dimensions & Blur */
+        /* Ambient Glow */
         body::before {
             content: '';
             position: absolute;
@@ -56,7 +55,7 @@
             width: 70vw;
             height: 70vw;
             background: radial-gradient(circle, rgba(255, 200, 200, 0.15) 0%, rgba(255,255,255,0) 70%);
-            filter: blur(60px); /* Halved from 120px */
+            filter: blur(60px);
             z-index: -1;
         }
 
@@ -64,14 +63,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px; /* Halved from 25px */
-            width: 450px; /* Fits comfortably in 540px */
+            gap: 12px;
+            width: 450px; 
             max-height: 425px; 
         }
 
         /* Typography */
         .header-text {
-            margin-bottom: 12px; /* Halved from 25px */
+            margin-bottom: 12px;
             text-align: center;
             width: 100%;
         }
@@ -82,28 +81,28 @@
         
         #greeting-text {
             color: #ffffff;
-            font-size: 1.4rem; /* Halved from 2.8rem */
+            font-size: 1.4rem; 
             font-weight: 700; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Shadows halved */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
             margin-bottom: 10px;
-            line-height: 1.5; /* Adjusted for smaller scale */
+            line-height: 1.5; 
         }
 
         #date-text {
             color: #99daff; 
-            font-size: 1.0rem; /* Halved from 1.8rem */
+            font-size: 1.0rem; 
             font-weight: 600; 
             margin-bottom: 20px; 
         }
 
-        /* Glass Clock Face - Scaled to 50% */
+        /* Glass Clock Face */
         .clock-face {
             width: 90%;
-            height: 160px; /* Halved from 320px */
+            height: 160px;
             background: var(--glass-bg);
-            backdrop-filter: blur(18px); /* Halved from 35px */
+            backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border-radius: 25px; /* Halved from 50px */
+            border-radius: 25px;
             border: 1px solid var(--glass-border); 
             box-shadow: 
                 inset 0 1px 1px rgba(255,255,255,0.2),
@@ -112,14 +111,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 17px; /* Halved from 35px */
+            gap: 17px; 
             position: relative;
         }
 
         /* --- 7-Segment Digit Logic --- */
         .digit {
-            width: 60px;  /* Halved from 120px */
-            height: 100px; /* Halved from 200px */
+            width: 60px;
+            height: 100px;
             position: relative;
             display: flex;
             align-items: center; 
@@ -137,12 +136,12 @@
             z-index: 2; 
         }
 
-        /* --- GEOMETRY & POSITIONS (All values / 2) --- */
+        /* --- GEOMETRY & POSITIONS --- */
         
         /* Horizontal Segments */
         .h-seg {
-            height: var(--seg-th); /* 9px */
-            width: 42px; /* 60 - (9*2) = 42px */
+            height: var(--seg-th);
+            width: 42px; 
             left: 9px;  
             clip-path: polygon(
                 var(--cut-size) 0, 
@@ -156,8 +155,8 @@
 
         /* Vertical Segments */
         .v-seg {
-            width: var(--seg-th); /* 9px */
-            height: 40px; /* (100 / 2) - offset buffer */
+            width: var(--seg-th);
+            height: 40px; 
             clip-path: polygon(
                 50% 0, 
                 100% var(--cut-size), 
@@ -173,7 +172,7 @@
         .mid    { position: relative; margin: 0 auto; left: auto; top: 0; } 
         .bot    { bottom: 0; }
         
-        /* Vertical Offsets (Halved from 15px to 7.5px) */
+        /* Vertical Offsets */
         .top-l  { top: 7.5px; left: 0; }
         .top-r  { top: 7.5px; right: 0; }
         .bot-l  { bottom: 7.5px; left: 0; }
@@ -184,11 +183,11 @@
         .separator {
             display: flex;
             flex-direction: column;
-            gap: 17px; /* Halved from 35px */
+            gap: 17px;
             padding-top: 5px;
         }
         .dot {
-            width: 9px;  /* Halved from 18px */
+            width: 9px;
             height: 9px;
             background: linear-gradient(to bottom, var(--segment-on-grad-start), var(--segment-on-grad-end));
             border-radius: 50%; 
@@ -207,15 +206,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 40px; /* Scaled down */
+            margin-top: 40px; 
         }
 
         .logo-container img {
-            max-width: 125px; /* Halved from 250px */
+            max-width: 125px;
             height: auto;
             display: block;
             filter: brightness(0) invert(1); 
-            opacity: 1;
+            opacity: 1; 
         }
 
     </style>
@@ -285,22 +284,19 @@
         // Background Gradients by Time
         // ========================================
         const BACKGROUND_GRADIENTS = {
-            dawn: 'linear-gradient(135deg, #2e2baf 0%, #1b2d77 50%, #102a58 100%)',      // 7am-8am
-            day: 'linear-gradient(135deg, #2e2baf 0%, #1b2d77 50%, #102a58 100%)',       // 8am-6pm
-            night: 'linear-gradient(135deg, #2e2baf 0%, #1b2d77 50%, #102a58 100%)'      // 6pm-7am
+            dawn: 'linear-gradient(135deg, #2e2baf 0%, #1b2d77 50%, #102a58 100%)',      
+            day: 'linear-gradient(135deg, #2e2baf 0%, #1b2d77 50%, #102a58 100%)',       
+            night: 'linear-gradient(135deg, #2e2baf 0%, #1b2d77 50%, #102a58 100%)'      
         };
 
         function setTimeBasedBackground(hour) {
             let gradient;
             
             if (hour >= 7 && hour < 8) {
-                // Dawn: 7am-8am
                 gradient = BACKGROUND_GRADIENTS.dawn;
             } else if (hour >= 8 && hour < 18) {
-                // Day: 8am-6pm
                 gradient = BACKGROUND_GRADIENTS.day;
             } else {
-                // Night: 6pm-7am
                 gradient = BACKGROUND_GRADIENTS.night;
             }
             
@@ -327,6 +323,9 @@
             const segments = digitEl.querySelectorAll('.segment');
             const map = digitMap[value];
 
+            // Safety check to prevent crashing if value is undefined
+            if (!map) return;
+
             segments.forEach((seg, index) => {
                 if (map[index] === 1) {
                     seg.classList.add('on');
@@ -339,12 +338,13 @@
         function updateClock() {
             // Get current time in Calgary
             const now = new Date();
-            // Use 24-hour format logic for background/greetings calculation
-            const timeOptions24 = { timeZone: "America/Edmonton", hour12: false, hour: 'numeric', minute: 'numeric' };
-            const timeString24 = now.toLocaleTimeString('en-US', timeOptions24); 
             
-            let [hoursStr, minutesStr] = timeString24.split(':');
-            let h = parseInt(hoursStr, 10);
+            // --- TIME LOGIC (Fixed for leading zero) ---
+            // We use getMinutes() + padStart to guarantee 2 digits always.
+            const min = now.getMinutes();
+            const finalMin = min.toString().padStart(2, '0');
+
+            const h = now.getHours();
             
             // --- Update Background based on Calgary Hour ---
             setTimeBasedBackground(h);
@@ -369,7 +369,7 @@
             document.getElementById('greeting-text').textContent = greetingPart;
             document.getElementById('date-text').textContent = `It's ${dateString}`;
 
-            // --- Digit Logic (Hide leading zero) ---
+            // --- Digit Logic (Hide leading zero for hour) ---
             let d1Val, d2Val;
             
             if (displayHour < 10) {
@@ -380,10 +380,6 @@
                 d1Val = hStr[0];
                 d2Val = hStr[1];
             }
-
-            // Ensure minutes have leading zero
-            const minOptions = { timeZone: "America/Edmonton", minute: '2-digit' };
-            const finalMin = now.toLocaleTimeString('en-US', { timeZone: "America/Edmonton", minute: '2-digit' }).slice(-2);
 
             setDigit('d1', d1Val);
             setDigit('d2', d2Val);
